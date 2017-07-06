@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans.xsd
+	 http://www.springframework.org/schema/context
+	 http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+	 
+	 <!-- 
+	 xmlns:mvc="http://www.springframework.org/schema/mvc"
+	 http://www.springframework.org/schema/mvc
+	 http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+	 <mvc:annotation-driven></mvc:annotation-driven>
+	  -->
+	  
+	<context:component-scan base-package="com.springbook.biz"></context:component-scan>
+	
+	<!-- HandlerMapping 등록 -->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/login.do">login</prop>
+				<prop key="/getBoardList.do">getBoardList</prop>
+				<prop key="/getBoard.do">getBoard</prop>
+				<prop key="/updateBoard.do">updateBoard</prop>
+				<prop key="/insertBoard.do">insertBoard</prop>
+				<prop key="/deleteBoard.do">deleteBoard</prop>
+				<prop key="/logout.do">logout</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 파일 업로드 설정 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="100000" />
+	</bean>
+	
+	<!-- Controller 등록 -->
+	<bean id="login" class="com.springbook.view.user.LoginController"></bean>
+	<bean id="getBoardList" class="com.springbook.view.board.BoardController"></bean>
+	<bean id="getBoard" class="com.springbook.view.board.BoardController"></bean>
+	<bean id="updateBoard" class="com.springbook.view.board.BoardController"></bean>
+	<bean id="insertBoard" class="com.springbook.view.board.BoardController"></bean>
+	<bean id="deleteBoard" class="com.springbook.view.board.BoardController"></bean>
+	<bean id="logout" class="com.springbook.view.user.LogoutController"></bean>
+	
+	<!-- ViewResolver 등록
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/board/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	 -->
+	 
+</beans>
