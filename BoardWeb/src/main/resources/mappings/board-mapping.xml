@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardDAO">
+	
+	<resultMap id="boardResult" type="board">
+		<id property="seq" column="SEQ" />
+		<result property="title" column="TITLE" />
+		<result property="writer" column="WRITER" />
+		<result property="content" column="CONTENT" />
+		<result property="regDate" column="REGDATE"	/>
+		<result property="cnt" column="CNT" />
+	</resultMap>
+	
+	<select id="getBoardList" resultType="board">
+		<![CDATA[
+		SELECT * FROM BOARD WHERE title LIKE '%'||#{searchKeyword}||'%'
+		ORDER BY SEQ DESC
+		]]>
+	</select>
+
+	<select id="getBoard" resultType="board">
+		<![CDATA[
+		SELECT * FROM board WHERE seq=#{seq}
+		]]>
+	</select>
+
+	<insert id="insertBoard" parameterType="board">
+		<![CDATA[
+		INSERT INTO board (seq, title, writer, content)
+		VALUES((select nvl(max(seq), 0)+1 from board), #{title}, #{writer}, #{content})
+		]]>
+	</insert>
+
+	<update id="updateBoard">
+		<![CDATA[
+		UPDATE board SET
+		title=#{title},
+		content=#{content}
+		WHERE
+		seq=#{seq}
+		]]>
+	</update>
+
+	<delete id="deleteBoard">
+		<![CDATA[
+		DELETE board WHERE seq=#{seq}
+		]]>
+	</delete>
+
+</mapper>

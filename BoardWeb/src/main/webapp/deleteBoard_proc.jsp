@@ -1,4 +1,4 @@
-<%@ page import="com.springbook.biz.board.impl.BoardDAO"%>
+<!-- %@ page import="com.springbook.biz.board.impl.BoardDAO"% -->
 <%@ page import="com.springbook.biz.board.BoardVO"%>
 <%@ page contentType="text/html; charset=EUC_KR"%>
 
@@ -8,8 +8,8 @@
 	BoardVO vo = new BoardVO();
 	vo.setSeq(Integer.parseInt(seq));
 	
-	BoardDAO boardDAO = new BoardDAO();
-	boardDAO.deleteBoard(vo);
+	//BoardDAO boardDAO = new BoardDAO();
+	//boardDAO.deleteBoard(vo);
 	
 	response.sendRedirect("getBoardList.jsp");
 %>

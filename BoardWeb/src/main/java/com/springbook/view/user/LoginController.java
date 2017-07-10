@@ -1,8 +1,7 @@
 package com.springbook.view.user;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-import org.h2.engine.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +13,8 @@ import com.springbook.biz.user.impl.UserDAO;
 @Controller
 public class LoginController{
 
-	@RequestMapping(value="/login.do")
-	public String login(UserVO vo, UserDAO userDAO, HttpServletRequest request) {
+	@RequestMapping(value="/login.do", method=RequestMethod.POST)
+	public String login(UserVO vo, UserDAO userDAO, HttpSession session) {
 		
 		System.out.println("로그인 처리");
 		
@@ -35,7 +34,7 @@ public class LoginController{
 //		ModelAndView mav = new ModelAndView();
 		if(user != null) {
 //			mav.setViewName("getBoardList.do");
-			request.setAttribute("userName", user.getName());
+			session.setAttribute("userName", user.getName());
 			return "getBoardList.do";
 		} else {
 //			mav.setViewName("login.jsp");
